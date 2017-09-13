@@ -18,7 +18,7 @@ export async function setupRouter(app: Ycs): Promise<Router[]> {
         methods: ['get'],
         auth: {
           type: 'hasRoles',
-          roles: config.roles
+          roles: config.roles,
         },
         controller: controller.index,
         tags: ['__alicloud_sms'],

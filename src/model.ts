@@ -14,13 +14,13 @@ export function createModel(config: IConfig): IModel {
       },
       expiresIn: {
         type: Date,
-        required: true
+        required: true,
       },
       category: {
         type: String,
         required: true,
-        enum: config.categories.map(x => x.name)
-      }
+        enum: config.categories.map(x => x.name),
+      },
     },
     {
       timestamps: {},
