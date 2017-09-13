@@ -66,7 +66,7 @@ export class Controller {
         templateCode: category.templateCode,
       };
       await this.sendSms(body);
-      const entity = await this.model.create({
+      await this.model.create({
         mobile: ctx.request.fields.mobile,
         code,
         expiresIn: moment()
@@ -74,7 +74,7 @@ export class Controller {
           .toDate(),
         category: category.name,
       });
-      response(ctx, 201, entity);
+      response(ctx, 204);
     } catch (e) {
       handleError(ctx, e);
     }
