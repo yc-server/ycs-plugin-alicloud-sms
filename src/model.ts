@@ -28,7 +28,7 @@ export function createModel(config: IConfig): IModel {
   );
   return Model({
     name: '__alicloud_sms',
-    auth: true,
+    auth: false,
     schema,
   });
 }

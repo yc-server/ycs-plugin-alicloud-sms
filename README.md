@@ -10,7 +10,7 @@ ycs add plugin alicloud-sms
 import { IConfig } from 'ycs-plugin-alicloud-sms';
 
 export const development: IConfig = {
-  endpoint: 'alicloud-sms',
+  endpoint: '/alicloud-sms',
   roles: ['alicloud-sms'],
   categories: [
     {
@@ -50,7 +50,7 @@ export const development: IConfig = {
 };
 
 export const production: IConfig = {
-  endpoint: 'alicloud-sms',
+  endpoint: '/alicloud-sms',
   roles: ['alicloud-sms'],
   categories: [
     {
