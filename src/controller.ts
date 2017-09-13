@@ -124,7 +124,7 @@ export class Controller {
       let status = 200;
 
       if (!auth) {
-        auth = await this.model.create({
+        auth = await AuthModel.create({
           providers: {
             name: this.config.signin.categoryName,
             openid: ctx.request.fields.mobile,
