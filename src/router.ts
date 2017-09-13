@@ -28,9 +28,8 @@ export async function setupRouter(app: Ycs): Promise<Router[]> {
         produces: ['application/json', 'application/xml'],
         parameters: [model.docSchema.paginateOptions],
         responses: {
-          200: {
+          204: {
             description: 'Successful operation',
-            schema: model.docSchema.paginateResult,
           },
           '4xx': model.docSchema.response4xx,
           '5xx': model.docSchema.response5xx,
