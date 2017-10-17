@@ -61,7 +61,7 @@ export class Controller {
         accessKeyID: category.accessKeyID,
         accessKeySecret: category.accessKeySecret,
         paramString: { code, product: category.product },
-        recNum: [ctx.request.fields.username],
+        recNum: [ctx.request.fields.mobile],
         signName: category.signName,
         templateCode: category.templateCode,
       };
