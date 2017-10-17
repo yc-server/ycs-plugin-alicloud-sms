@@ -30,7 +30,7 @@ export class Controller {
       if (!ctx.request.fields) throw Boom.badData(this.config.errors.empty);
       if (!ctx.request.fields.category)
         throw Boom.badData(this.config.errors.emptyCategory);
-      if (!ctx.request.fields.mobile)
+      if (!ctx.request.fields.username)
         throw Boom.badData(this.config.errors.emptyMobile);
 
       const category = this.config.categories.find(
@@ -40,7 +40,7 @@ export class Controller {
 
       const exists = await this.model
         .count({
-          mobile: ctx.request.fields.mobile,
+          mobile: ctx.request.fields.username,
           category: category.name,
           createdAt: {
             $gt: moment()
@@ -61,13 +61,13 @@ export class Controller {
         accessKeyID: category.accessKeyID,
         accessKeySecret: category.accessKeySecret,
         paramString: { code, product: category.product },
-        recNum: [ctx.request.fields.mobile],
+        recNum: [ctx.request.fields.username],
         signName: category.signName,
         templateCode: category.templateCode,
       };
       await this.sendSms(body);
       await this.model.create({
-        mobile: ctx.request.fields.mobile,
+        mobile: ctx.request.fields.username,
         code,
         expiresIn: moment()
           .add(category.expiresIn.quantity, category.expiresIn.unit)
@@ -106,11 +106,11 @@ export class Controller {
       if (!ctx.request.fields) throw Boom.badData(this.config.errors.empty);
       if (!ctx.request.fields.code)
         throw Boom.badData(this.config.errors.emptyCode);
-      if (!ctx.request.fields.mobile)
+      if (!ctx.request.fields.username)
         throw Boom.badData(this.config.errors.emptyMobile);
 
       const correct = await this.verify({
-        mobile: ctx.request.fields.mobile,
+        mobile: ctx.request.fields.username,
         code: ctx.request.fields.code,
         category: this.config.signin.categoryName,
       });
@@ -119,7 +119,7 @@ export class Controller {
 
       let auth = await AuthModel.findOne({
         'providers.name': this.config.signin.categoryName,
-        'providers.openid': ctx.request.fields.mobile,
+        'providers.openid': ctx.request.fields.username,
       }).exec();
       let status = 200;
 
@@ -127,7 +127,7 @@ export class Controller {
         auth = await AuthModel.create({
           providers: {
             name: this.config.signin.categoryName,
-            openid: ctx.request.fields.mobile,
+            openid: ctx.request.fields.username,
           },
         });
         status = 201;
@@ -136,6 +136,38 @@ export class Controller {
         expiresIn: this.config.signin.expiresIn,
       });
       response(ctx, status, { token });
+    } catch (e) {
+      handleError(ctx, e);
+    }
+  };
+
+  // reset password
+  public reset = async (ctx: IContext) => {
+    try {
+      if (!ctx.request.fields) throw Boom.badData(this.config.errors.empty);
+      if (!ctx.request.fields.code)
+        throw Boom.badData(this.config.errors.emptyCode);
+      if (!ctx.request.fields.username)
+        throw Boom.badData(this.config.errors.emptyUsername);
+      if (!ctx.request.fields.password)
+        throw Boom.badData(this.config.errors.emptyPassword);
+
+      const correct = await this.verify({
+        mobile: ctx.request.fields.username,
+        code: ctx.request.fields.code,
+        category: this.config.reset.categoryName,
+      });
+
+      if (!correct) throw Boom.badData(this.config.reset.errors.invalidCode);
+
+      let auth = await AuthModel.findOne({
+        'providers.name': this.config.reset.categoryName,
+        'providers.openid': ctx.request.fields.username,
+      }).exec();
+      if (!auth) throw Boom.badData(this.config.errors.emptyUsername);
+      auth['password'] = String(ctx.request.fields.password);
+      await auth.save();
+      response(ctx, 204);
     } catch (e) {
       handleError(ctx, e);
     }
