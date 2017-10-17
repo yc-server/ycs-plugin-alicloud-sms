@@ -30,7 +30,7 @@ export class Controller {
       if (!ctx.request.fields) throw Boom.badData(this.config.errors.empty);
       if (!ctx.request.fields.category)
         throw Boom.badData(this.config.errors.emptyCategory);
-      if (!ctx.request.fields.username)
+      if (!ctx.request.fields.mobile)
         throw Boom.badData(this.config.errors.emptyMobile);
 
       const category = this.config.categories.find(
@@ -40,7 +40,7 @@ export class Controller {
 
       const exists = await this.model
         .count({
-          mobile: ctx.request.fields.username,
+          mobile: ctx.request.fields.mobile,
           category: category.name,
           createdAt: {
             $gt: moment()
@@ -161,10 +161,9 @@ export class Controller {
       if (!correct) throw Boom.badData(this.config.reset.errors.invalidCode);
 
       let auth = await AuthModel.findOne({
-        'providers.name': this.config.reset.categoryName,
-        'providers.openid': ctx.request.fields.username,
+        username: ctx.request.fields.username,
       }).exec();
-      if (!auth) throw Boom.badData(this.config.errors.emptyUsername);
+      if (!auth) throw Boom.badData(this.config.errors.usernameNotFound);
       auth['password'] = String(ctx.request.fields.password);
       await auth.save();
       response(ctx, 204);
