@@ -91,6 +91,7 @@ export class Controller {
       .count({
         mobile: body.mobile,
         category: category.name,
+        code: body.code,
         createdAt: {
           $gt: moment()
             .subtract(category.expiresIn.quantity, category.expiresIn.unit)
