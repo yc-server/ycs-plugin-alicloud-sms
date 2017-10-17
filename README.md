@@ -31,7 +31,26 @@ export const development: IConfig = {
         unit: 'minute',
         error: 'You can only send one sms per minute',
       },
-    }
+    },
+    {
+      name: 'reset',
+      accessKeyID: 'xxx',
+      accessKeySecret: 'xxx',
+      templateCode: 'xxx',
+      signName: 'xxx',
+      product: 'xxx',
+      codeLength: 6,
+      expiresIn: {
+        quantity: 15,
+        unit: 'minute',
+        error: 'Invalid code',
+      },
+      resendInterval: {
+        quantity: 1,
+        unit: 'minute',
+        error: 'You can only send one sms per minute',
+      },
+    },
   ],
   errors: {
     empty: 'Empty body',
@@ -81,7 +100,26 @@ export const production: IConfig = {
         unit: 'minute',
         error: 'You can only send one sms per minute',
       },
-    }
+    },
+    {
+      name: 'reset',
+      accessKeyID: 'xxx',
+      accessKeySecret: 'xxx',
+      templateCode: 'xxx',
+      signName: 'xxx',
+      product: 'xxx',
+      codeLength: 6,
+      expiresIn: {
+        quantity: 15,
+        unit: 'minute',
+        error: 'Invalid code',
+      },
+      resendInterval: {
+        quantity: 1,
+        unit: 'minute',
+        error: 'You can only send one sms per minute',
+      },
+    },
   ],
   errors: {
     empty: 'Empty body',
