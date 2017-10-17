@@ -1,6 +1,6 @@
 {
   "name": "ycs-plugin-alicloud-sms",
-  "version": "1.1.4",
+  "version": "1.2.1",
   "description": "ycs-plugin-alicloud-sms",
   "license": "MIT",
   "repository": "https://github.com/yc-server/ycs-plugin-alicloud-sms.git",
@@ -31,7 +31,7 @@
     "watch:test": "jest --watch"
   },
   "dependencies": {
-    "ali-sms": "^1.0.3"
+    "ali-sms": "1.0.2"
   },
   "devDependencies": {
     "@types/jest": "^20.0.5",
