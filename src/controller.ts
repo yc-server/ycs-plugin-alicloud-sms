@@ -67,7 +67,7 @@ export class Controller {
       };
       await this.sendSms(body);
       await this.model.create({
-        mobile: ctx.request.fields.username,
+        mobile: ctx.request.fields.mobile,
         code,
         expiresIn: moment()
           .add(category.expiresIn.quantity, category.expiresIn.unit)
