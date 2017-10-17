@@ -65,7 +65,7 @@ export class Controller {
         signName: category.signName,
         templateCode: category.templateCode,
       };
-      await this.sendSms(body);
+      const res = await this.sendSms(body);
       await this.model.create({
         mobile: ctx.request.fields.mobile,
         code,
@@ -74,7 +74,7 @@ export class Controller {
           .toDate(),
         category: category.name,
       });
-      response(ctx, 204);
+      response(ctx, 201, res);
     } catch (e) {
       handleError(ctx, e);
     }
