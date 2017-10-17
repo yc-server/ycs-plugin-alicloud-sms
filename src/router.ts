@@ -136,6 +136,47 @@ export async function setupRouter(app: Ycs): Promise<Router[]> {
           '4xx': model.docSchema.response4xx,
           '5xx': model.docSchema.response5xx,
         },
+      },
+      {
+        path: '/reset',
+        methods: ['post'],
+        controller: controller.reset,
+        tags: ['__alicloud_sms'],
+        summary: 'Reset password with sms',
+        description: `Reset password with sms`,
+        consumes: ['application/json', 'application/xml'],
+        produces: ['application/json', 'application/xml'],
+        parameters: [
+          {
+            in: 'body',
+            name: 'body',
+            required: true,
+            schema: {
+              type: 'object',
+              properties: {
+                username: {
+                  type: 'string',
+                },
+                code: {
+                  type: 'string',
+                },
+                password: {
+                  type: 'string',
+                },
+              },
+              xml: {
+                name: 'xml',
+              },
+            },
+          },
+        ],
+        responses: {
+          204: {
+            description: 'Successful operation'
+          },
+          '4xx': model.docSchema.response4xx,
+          '5xx': model.docSchema.response5xx,
+        },
       }
     )
   );

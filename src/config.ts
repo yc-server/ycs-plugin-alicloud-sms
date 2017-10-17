@@ -9,9 +9,19 @@ export interface IConfig {
     emptyCategory: string;
     emptyMobile: string;
     emptyCode: string;
+    emptyUsername: string;
+    emptyPassword: string;
     unknownCategory: string;
+    usernameNotFound: string;
   };
   signin: {
+    categoryName: string;
+    expiresIn: any;
+    errors: {
+      invalidCode: string;
+    };
+  };
+  reset: {
     categoryName: string;
     expiresIn: any;
     errors: {
