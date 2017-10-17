@@ -38,10 +38,20 @@ export const development: IConfig = {
     emptyCategory: 'Empty category',
     emptyMobile: 'Empty mobile',
     emptyCode: 'Empty code',
+    emptyUsername: 'Empty username',
+    emptyPassword: 'Empty password',
     unknownCategory: 'Unknown category',
+    usernameNotFound: 'Username not found',
   },
   signin: {
     categoryName: 'signin',
+    expiresIn: '1h',
+    errors: {
+      invalidCode: 'invalidCode',
+    },
+  },
+  reset: {
+    categoryName: 'reset',
     expiresIn: '1h',
     errors: {
       invalidCode: 'invalidCode',
@@ -78,10 +88,20 @@ export const production: IConfig = {
     emptyCategory: 'Empty category',
     emptyMobile: 'Empty mobile',
     emptyCode: 'Empty code',
+    emptyUsername: 'Empty username',
+    emptyPassword: 'Empty password',
     unknownCategory: 'Unknown category',
+    usernameNotFound: 'Username not found',
   },
   signin: {
     categoryName: 'signin',
+    expiresIn: '1h',
+    errors: {
+      invalidCode: 'invalidCode',
+    },
+  },
+  reset: {
+    categoryName: 'reset',
     expiresIn: '1h',
     errors: {
       invalidCode: 'invalidCode',

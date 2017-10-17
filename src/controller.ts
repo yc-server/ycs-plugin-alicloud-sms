@@ -45,8 +45,8 @@ export class Controller {
           createdAt: {
             $gt: moment()
               .subtract(
-              category.resendInterval.quantity,
-              category.resendInterval.unit
+                category.resendInterval.quantity,
+                category.resendInterval.unit
               )
               .toDate(),
           },
