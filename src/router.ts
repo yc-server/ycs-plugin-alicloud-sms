@@ -172,7 +172,7 @@ export async function setupRouter(app: Ycs): Promise<Router[]> {
         ],
         responses: {
           204: {
-            description: 'Successful operation'
+            description: 'Successful operation',
           },
           '4xx': model.docSchema.response4xx,
           '5xx': model.docSchema.response5xx,
