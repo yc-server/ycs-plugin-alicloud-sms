@@ -107,11 +107,11 @@ export class Controller {
       if (!ctx.request.fields) throw Boom.badData(this.config.errors.empty);
       if (!ctx.request.fields.code)
         throw Boom.badData(this.config.errors.emptyCode);
-      if (!ctx.request.fields.username)
+      if (!ctx.request.fields.mobile)
         throw Boom.badData(this.config.errors.emptyMobile);
 
       const correct = await this.verify({
-        mobile: ctx.request.fields.username,
+        mobile: ctx.request.fields.mobile,
         code: ctx.request.fields.code,
         category: this.config.signin.categoryName,
       });
@@ -120,7 +120,7 @@ export class Controller {
 
       let auth = await AuthModel.findOne({
         'providers.name': this.config.signin.categoryName,
-        'providers.openid': ctx.request.fields.username,
+        'providers.openid': ctx.request.fields.mobile,
       }).exec();
       let status = 200;
 
@@ -128,7 +128,7 @@ export class Controller {
         auth = await AuthModel.create({
           providers: {
             name: this.config.signin.categoryName,
-            openid: ctx.request.fields.username,
+            openid: ctx.request.fields.mobile,
           },
         });
         status = 201;
