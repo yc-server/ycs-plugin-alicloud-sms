@@ -125,13 +125,26 @@ export class Controller {
       let status = 200;
 
       if (!auth) {
-        auth = await AuthModel.create({
-          providers: {
+        const oldAuth = await AuthModel.findOne({
+          username: ctx.request.fields.mobile,
+        }).exec();
+
+        if (!oldAuth) {
+          auth = await AuthModel.create({
+            username: ctx.request.fields.mobile,
+            providers: {
+              name: this.config.signin.categoryName,
+              openid: ctx.request.fields.mobile,
+            },
+          });
+          status = 201;
+        } else {
+          oldAuth['providers'].push({
             name: this.config.signin.categoryName,
             openid: ctx.request.fields.mobile,
-          },
-        });
-        status = 201;
+          });
+          auth = await oldAuth.save();
+        }
       }
       const token = signToken(auth, {
         expiresIn: this.config.signin.expiresIn,
