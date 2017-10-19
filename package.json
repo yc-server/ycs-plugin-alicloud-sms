@@ -1,6 +1,6 @@
 {
   "name": "ycs-plugin-alicloud-sms",
-  "version": "1.2.3",
+  "version": "1.2.9",
   "description": "ycs-plugin-alicloud-sms",
   "license": "MIT",
   "repository": "https://github.com/yc-server/ycs-plugin-alicloud-sms.git",
