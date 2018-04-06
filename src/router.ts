@@ -180,9 +180,7 @@ export async function setupRouter(app: Ycs): Promise<Router[]> {
         '5xx': model.docSchema.response5xx,
       },
     });
-  routers.push(
-    model.routes(config.endpoint, ...docs)
-  );
+  routers.push(model.routes(config.endpoint, ...docs));
 
   return routers;
 }
