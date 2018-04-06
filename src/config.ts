@@ -15,14 +15,14 @@ export interface IConfig {
     usernameNotFound: string;
     captcha?: string;
   };
-  signin: {
+  signin?: {
     categoryName: string;
     expiresIn: any;
     errors: {
       invalidCode: string;
     };
   };
-  reset: {
+  reset?: {
     categoryName: string;
     expiresIn: any;
     errors: {
