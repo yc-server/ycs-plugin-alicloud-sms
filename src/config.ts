@@ -1,4 +1,4 @@
-// import { IErrors } from './errors';
+import { IContext } from '@ycs/core/lib/context';
 
 export interface IConfig {
   endpoint: string;
@@ -13,15 +13,16 @@ export interface IConfig {
     emptyPassword: string;
     unknownCategory: string;
     usernameNotFound: string;
+    captcha?: string;
   };
-  signin: {
+  signin?: {
     categoryName: string;
     expiresIn: any;
     errors: {
       invalidCode: string;
     };
   };
-  reset: {
+  reset?: {
     categoryName: string;
     expiresIn: any;
     errors: {
@@ -48,4 +49,5 @@ export interface IConfigCategory {
     unit: 'month' | 'day' | 'hour' | 'minute' | 'second';
     error: string;
   };
+  captcha?: (ctx: IContext) => Promise<boolean>;
 }
