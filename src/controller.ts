@@ -38,6 +38,10 @@ export class Controller {
       );
       if (!category) throw Boom.badData(this.config.errors.unknownCategory);
 
+      if (category.captcha) {
+        const verified = await category.captcha(ctx);
+        if (!verified) throw Boom.badData(this.config.errors.captcha);
+      }
       const exists = await this.model
         .count({
           mobile: ctx.request.fields.mobile,
