@@ -191,7 +191,7 @@ export class Controller {
   };
 
   // send sms
-  private sendSms = (body: any): Promise<any> => {
+  public sendSms = (body: any): Promise<any> => {
     return new Promise((resolve, reject) => {
       sms(body, (err, body) => {
         if (err) {
