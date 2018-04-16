@@ -37,7 +37,7 @@ export interface IConfigCategory {
   accessKeySecret: string;
   templateCode: string;
   signName: string;
-  product: string;
+  product?: string;
   codeLength: number;
   expiresIn: {
     quantity: number;
