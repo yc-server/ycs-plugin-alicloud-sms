@@ -61,10 +61,12 @@ export class Controller {
       const code = Math.random()
         .toString()
         .substring(2, category.codeLength + 2);
+      const paramString: any = { code };
+      if (category.product) paramString.product = category.product;
       const body = {
         accessKeyID: category.accessKeyID,
         accessKeySecret: category.accessKeySecret,
-        paramString: { code, product: category.product },
+        paramString,
         recNum: [ctx.request.fields.mobile],
         signName: category.signName,
         templateCode: category.templateCode,
